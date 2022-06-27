@@ -1,0 +1,75 @@
+package Doselect.demo;
+
+import java.io.*;
+import java.util.*;
+//import java.util.Scanner;
+
+class Mobile{
+    HashMap<String, ArrayList<String>> mobileList = new HashMap<>();
+
+    public String addMobile(String company, String model)
+    { 
+        if(mobileList.containsKey(company))
+        {
+            ArrayList<String> templist = mobileList.get(company);
+            templist.add(model);
+            mobileList.replace(company,templist);
+        }
+        else
+        {
+            ArrayList<String> templist = new ArrayList<>();
+            templist.add(model);
+            mobileList.put(company,templist);
+        }
+       return "Model successfully added";
+    }
+    
+    public ArrayList<String>getModels(String company)
+    {
+        ArrayList<String> temp = mobileList.get(company);
+        if(mobileList.containsKey(company))
+        if(!temp.isEmpty())
+        {
+            return temp;
+        }
+        return null;
+    }
+
+    public String buyMobile(String company, String model)
+    {
+        if(mobileList.containsKey(company))
+        {
+        ArrayList<String> temp = mobileList.get(company);
+        if(!temp.isEmpty())
+        {
+            if(temp.contains(model))
+            {
+                temp.remove(model);
+                mobileList.put(company,temp);
+                return "Mobile sold successfully";
+            }
+            else
+            {
+                return "Item not available";    
+            }
+        
+        }
+    
+        }
+    return "Item not available";
+    }
+}
+
+public class MobileShop {
+    public static void main(String args[] ) throws Exception {
+        Mobile obj = new Mobile();
+     //   Scanner input = new Scanner(System.in);
+     //   String company = input.nextLine();
+      //  String model = input.nextLine();
+
+    obj.addMobile("öppo","k3");
+   obj.getModels("oppo");
+   obj.buyMobile("oppo","k3");
+    }
+    
+}
